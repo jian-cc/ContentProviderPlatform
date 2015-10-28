@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   	
+    <parent>
+        <artifactId>platform-parent</artifactId>
+        <groupId>com.cloudcar.contentprovider.platform</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    
+    <description>API Package for integrating external provider </description>
+
+    <artifactId>provider-api</artifactId>
+	
+    <dependencies>
+    	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		
+    	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		
+    	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		
+    	<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		
+    	<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.googlecode.json-simple</groupId>
+		  <artifactId>json-simple</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.cloudcar.contentprovider.platform</groupId>
+			<artifactId>platform-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.cloudcar.contentprovider.platform</groupId>
+			<artifactId>provider-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		 <dependency>
+      		<groupId>org.jboss.resteasy</groupId>
+       		<artifactId>resteasy-jaxrs</artifactId>
+   		</dependency>
+		
+		<dependency>
+ 			<groupId>org.jboss.resteasy</groupId>
+   			<artifactId>resteasy-jaxb-provider</artifactId>
+		</dependency>
+		
+		<dependency>
+    			<groupId>org.jboss.resteasy</groupId>
+      			<artifactId>resteasy-jackson-provider</artifactId>
+  			</dependency>
+		
+		<dependency>
+   			<groupId>org.jboss.resteasy</groupId>
+   			<artifactId>jaxrs-api</artifactId>
+		</dependency>
+		
+		<dependency>
+   			<groupId>org.jboss.resteasy</groupId>
+   			<artifactId>resteasy-client</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-core</artifactId>
+		</dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,25 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.SearchEntity",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "searchEntity:v1",
+	"title":"search entity",
+	"name":"searchEntity",
+	"description":"Information of entity being searched. We expects at least one alternative information is available",
+    
+    "properties" : 
+    {
+    	"id" : 
+    	{
+    		"description":"unique id for this entity. It is used by cloudcar internally but also can potentially be mapped to provider's entity id",
+    		"type" : "string"
+    	},
+        "title" : 
+        {
+        	"description" : "The title of this entity. It could be its official business name",
+        	"type" : "string"
+        }
+    },
+    
+    "required": []
+}

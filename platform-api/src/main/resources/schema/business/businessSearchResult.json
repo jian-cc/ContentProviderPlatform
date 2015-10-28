@@ -1,0 +1,59 @@
+{
+	"type":"object",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchResult"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "business_search_result:v1",
+	"title":"business search result",
+	"name":"businessSearchResult",
+	"description":"information of search result for a single business entity.",
+
+	"properties" :
+    {
+    	"location" : { 
+    		"$ref" : "../common/location.json"
+    	},
+    	"id" : {
+    		"type" : "string"
+    	},
+    	"title" : {
+    		"type" : "string"
+    	},
+    	"contact" : {
+    		"$ref" : "../common/contact.json"
+    	},
+    	"business_time" : 
+    	{
+    		"$ref" : "businessTime.json"
+    	},
+    	"icon" : 
+    	{
+    		"description":"information of icon url",
+    		"type" : "string"
+    	},
+    	"type" : {
+    		"type" : "array",
+    		"items" : 
+        	{
+        		"type" : "string"
+        	}
+    	},
+    	"category" : 
+    	{
+    		"type" : "array",
+    		"items" : 
+        	{
+        		"type" : "string"
+        	}
+    	
+    	},
+    	"provider_detail" : {
+    		"description":"this is undefined json object",
+    		"type" : "array",
+    		"items" : 
+        	{
+        		"type" : "../common/providerDetail.json"
+        	}
+    	}
+    }
+      
+}

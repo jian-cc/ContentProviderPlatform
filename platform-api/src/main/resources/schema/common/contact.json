@@ -1,0 +1,32 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.Contact",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "contact:v1",
+	"title":"contact",
+	"name":"contact",
+	"description":"common contact information.",
+	
+    "properties": 
+    {
+        "name" : 
+        { 
+        	"type" : "string"
+        },
+        "phones" : 
+        {
+        	"description":"contact can have multiple phone. The first one is default one",
+        	"type" : "array",
+        	"items" :
+        	{
+        		"type" : "string"
+        	}
+        },
+        "email" : 
+        {
+        	"type" : "string"
+        }
+    },
+    
+    "required": [ "name", "phones" ]
+}

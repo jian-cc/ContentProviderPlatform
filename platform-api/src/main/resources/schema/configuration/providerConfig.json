@@ -1,0 +1,79 @@
+{
+	"type":"object",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "providerConfig:v1",
+	"title":"content provider configuration",
+	"name":"providerConfig",
+	"description":"information of individual content provider",
+	
+    "properties": 
+    {
+        "identifier" : 
+        { 
+        	"description":"unique identification for this provider. It could be provider's name",
+        	"type" : "string"
+        },
+        "provider_type" : 
+        {
+        	"description":"the type of content this provider API provides. We may use same provider for different content, and expect to use this field to distinguish them. We will have different config for each of them",
+        	"$ref" : "../common/providerType.json"
+        },
+        "message_queue" : 
+        {
+        	"description":"The event message this provider will listen, which should be valid on platform",
+        	"type" : "string"
+        },
+        "timeout" : 
+        {
+        	"description":"the event timeout for this provider's message event. unit is millisecond",
+        	"type" : "number"
+        },
+        "defaultError" : 
+        {
+        	"description":"Default error message in case there is no specific message available",
+        	"type" : "string"
+        },
+        "provider_url" : 
+        {
+        	"description":"url of content provider's API by which we can call to get content",
+        	"type" : "string"
+        },
+        "provider_port" : 
+        {
+        	"description":"port number of content provider's API by which we can call to get content",
+        	"type" : "string"
+        },
+        "provider_endpoint" : 
+        {
+        	"description":"The relative path of end point for this API",
+        	"type" : "string"
+        },
+        "provider_method" : 
+        {
+        	"description":"The relative path of end point for this API",
+        	"enum" : ["GET", "POST"]
+        },
+        "provider_key" : 
+        {
+        	"description":"product key of content provider's API by which we can call to get content",
+        	"type" : "string"
+        },
+        "provider_product_type" : 
+        {
+        	"description":"product type of content provider's API, such as application/json",
+        	"type" : "string"
+        },
+        "provider_content_type" : 
+        {
+        	"description":"content type of content provider's API, such as application/json",
+        	"type" : "string"
+        },
+        "content_root_key" : 
+        {
+        	"description":"root key for result list of return json response",
+        	"type" : "string"
+        }
+    },
+    
+    "required": [ "identifier", "provider_type", "message_queue", "provider_url", "provider_port" ]
+}

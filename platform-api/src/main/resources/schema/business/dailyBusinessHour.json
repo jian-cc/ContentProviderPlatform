@@ -1,0 +1,25 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.business.DailyBusinessHour",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "daily_business_hour:v1",
+	"title":"daily business hour",
+	"name":"dailyBusinessHour",
+	"description":"information of business hour for a single day",
+
+	"properties" :
+    {
+    	"is_open" : 
+    	{ 
+    		"enum" : ["yes", "no", "unknown"]
+    	},
+    	"start" : 
+    	{
+    		"$ref" : "../common/time.json"
+    	},
+    	"end" : {
+    		"$ref" : "../common/time.json"
+    	}
+    }
+      
+}

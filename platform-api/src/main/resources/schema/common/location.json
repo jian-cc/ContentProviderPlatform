@@ -1,0 +1,32 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.Location",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "location:v1",
+	"title":"location",
+	"name":"location",
+	"description":"combination information regarding to location. it has three alternative sources, locationId, geocode, and real address. It also include radius information for that location",
+    
+    "properties": {
+    	"locationId": 
+    	{
+    		"description" : "It is a unique id to represent a real address or geocode. In general, it is used by cloudcar internally. It can also map to a provider's location id if it is allowed",
+    		"type": "string"
+    	},
+    	"geocode" : 
+    	{
+    		"$ref": "geocode.json"
+    	},
+        "address" : 
+        {
+        	"$ref" : "address.json"
+        },
+        "radius" : 
+        {
+        	"description" : "default unit is mile",
+        	"type" : "number"
+        }
+    },
+    
+    "required": []
+}

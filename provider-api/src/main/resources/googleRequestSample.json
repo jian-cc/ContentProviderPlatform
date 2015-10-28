@@ -1,0 +1,17 @@
+{
+    "search_id": "12345",
+    "search_criteria"
+    {
+    	"location" :
+    	{
+    		"geocode" :
+			{
+         		"latitude" : "37.400242",
+         		"longitude" : "-122.104904"
+         		
+			},
+        	"radius" : "5"
+    	},
+    	 "category" : ["pizza", "food"]
+    }
+}

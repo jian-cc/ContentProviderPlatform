@@ -1,0 +1,42 @@
+{
+	"type":"object",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchResponse"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "businessResponse:v1",
+	"title":"business response",
+	"name":"businessResponse",
+	"description":"information of business search response",
+
+	"properties" :
+    {
+    	"status" : 
+    	{ 
+    		"enum" : ["SUCCESS", "FAILURE", "NO_RESULT"]
+    	},
+    	"response_id" : {
+    		"description":"unique id for this search response",
+    		"type" : "string"
+    	},
+    	"search_criteria" : 
+    	{
+    		"$ref" : "businessSearchCriteria.json"
+    	},
+    	"error_content" : 
+    	{
+    		"description":"it will return when response status is failure",
+    		"$ref" : "../common/errorContent.json"
+    	},
+    	"results" : 
+    	{
+    		"description":"it will return when response status is success",
+    		"type" : "array",
+    		"items" : 
+    		{
+    			"type" : "businessSearchResult.json"
+    		}
+    	}
+    },
+    
+    "required": ["status", "search_id", "seaerch_criteria"]
+      
+}

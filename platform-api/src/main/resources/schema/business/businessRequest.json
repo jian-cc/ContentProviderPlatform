@@ -1,0 +1,25 @@
+{
+	"type":"object",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchRequest"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "business_request:v1",
+	"title":"business request",
+	"name":"businessRequest",
+	"description":"Business request information.",
+    
+    "properties": 
+    {
+    	"search_id": 
+    	{
+    		"description":"We expect this id is used like session id and help CPP client to link search history together",
+    		"type": "string"
+    	},
+    	"search_criteria" : 
+    	{
+    		"$ref" : 
+    		"businessSearchCriteria.json"
+    	}
+    },
+    
+    "required": ["search_id", "search_criteria"]
+}

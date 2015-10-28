@@ -1,0 +1,18 @@
+{
+	"id": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "request of business/location search request",
+
+	"properties" :
+    {
+    	"open_now" : { "type" : "boolean"},
+    	"monday" : {"$ref" : "dailyBusinessHour.json"},
+    	"tuesday" : {"$ref" : "dailyBusinessHour.json"},
+    	"wednesday" : {"$ref" : "dailyBusinessHour.json"},
+    	"thursday" : {"$ref" : "dailyBusinessHour.json"},
+    	"friday" : {"$ref" : "dailyBusinessHour.json"},
+    	"saturday" : {"$ref" : "dailyBusinessHour.json"},
+    	"sunday" : {"$ref" : "dailyBusinessHour.json"}
+    }
+      
+}

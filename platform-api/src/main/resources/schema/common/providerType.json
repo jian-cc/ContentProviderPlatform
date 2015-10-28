@@ -1,0 +1,9 @@
+{
+	"enum" : ["BUSINESS", "PLACE", "WEATHER"],
+	"javaType" : "com.cloudcar.search.schema.common.ProviderType",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "contentType:v1",
+	"title":"content type",
+	"name":"contentType",
+	"description":"the enum values for types of content CPP support"
+}

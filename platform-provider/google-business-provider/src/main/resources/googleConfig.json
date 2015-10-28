@@ -1,0 +1,25 @@
+{
+	"identifier" : "google-business",
+        
+  	"provider_type" : "BUSINESS", 
+        
+     "message_queue" : "google_business_msg",
+     
+     "timeout" : "100000",
+     
+     "defaultError" : "Failed to get google search result", 
+        
+     "provider_url" : "https://maps.googleapis.com",
+        
+     "provider_endpoint" : "maps/api/place/textsearch/json", 
+        
+     "provider_method" : "GET", 
+        
+      "provider_key" : "AIzaSyBim9i4jcLd7KJdZJediqwyQBWaaJCHPWA",
+        
+      "provider_product_type" : "application/json",
+       
+      "provider_content_type" : "application/json",
+      
+      "content_root_key" : "results"
+}

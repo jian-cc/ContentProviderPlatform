@@ -1,0 +1,24 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.ProviderDetail",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "providerDetail:v1",
+	"title":"provider detail",
+	"name":"providerDetail",
+	"description":"information of a search result from a single provider",
+
+	"properties" :
+    {
+    	"provider" : 
+    	{
+    		"description": "provider identification, it could be a provider's name, its id, or anything provider want to use to identify itself", 
+    		"type" : "string"
+    	},
+    	"result" : 
+    	{
+    		"description": "the detail result from this provider. Beware, this is undefined-type object, a same provider may give different format of result for different search type",
+    		"type" : "object"
+    	}
+    }
+      
+}

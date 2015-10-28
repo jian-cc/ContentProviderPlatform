@@ -1,0 +1,23 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.Geocode",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "geocode:v1",
+	"title":"geocode",
+	"name":"geocode",
+	"description":"Standard geocode information.",
+    
+    "properties" : 
+    {
+    	"latitude" : 
+    	{
+    		"type" : "number"
+    	},
+        "longitude" : 
+        {
+        	"type" : "number"
+        }
+    },
+    
+    "required": [ "latitude", "longitude" ]
+}

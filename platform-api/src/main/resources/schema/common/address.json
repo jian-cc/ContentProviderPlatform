@@ -1,0 +1,39 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.Address",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "address:v1",
+	"title":"address",
+	"name":"address",
+	"description":"common address information.",
+	
+    "properties": 
+    {
+        "address1" : 
+        { 
+        	"type" : "string"
+        },
+        "address2" : 
+        {
+        	"type" : "string"
+        },
+        "city" : 
+        {
+        	"type" : "string"
+        },
+        "postcode" : 
+        {
+        	"type" : "string"
+        },
+        "state" : 
+        {
+        	"type" : "string"
+        },
+        "country" : 
+        {
+        	"type" : "string"
+        }
+    },
+    
+    "required": [ "address1", "city", "state" ]
+}
