@@ -19,7 +19,7 @@ public interface ContentProviderHandler<Request extends SearchRequest, Response 
 
 	ProviderType getSupportType();
 
-	ContentProviderConverter<Request, Result> getConverter();
+	ContentProviderConverter<Result> getConverter();
 
 	ContentProviderExecutor getExecutor();
 

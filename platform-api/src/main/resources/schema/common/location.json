@@ -13,14 +13,19 @@
     		"description" : "It is a unique id to represent a real address or geocode. In general, it is used by cloudcar internally. It can also map to a provider's location id if it is allowed",
     		"type": "string"
     	},
+    	
     	"geocode" : 
     	{
+    		"description": "location's geocode informatoin",
     		"$ref": "geocode.json"
     	},
+    	
         "address" : 
         {
+        	"description": "location's detail address information",
         	"$ref" : "address.json"
         },
+        
         "radius" : 
         {
         	"description" : "default unit is mile",

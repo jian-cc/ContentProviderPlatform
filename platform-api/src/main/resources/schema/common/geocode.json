@@ -11,10 +11,13 @@
     {
     	"latitude" : 
     	{
+    		"description": "location's latitude",
     		"type" : "number"
     	},
+    	
         "longitude" : 
         {
+        	"description": "location's longitude",
         	"type" : "number"
         }
     },

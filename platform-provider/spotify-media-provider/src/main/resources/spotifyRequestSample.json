@@ -1,0 +1,27 @@
+{
+    "search_id": "12345",
+    
+    "providers" :
+    [
+    	{
+    		"type" : "MEDIA",
+    		
+    		"name" : "spotify",
+    		
+    		"credential_info" :
+    		{
+    			"access_token" : "Bearer BQDz8xd2JVjzTfRL2XTVpzC3oTlYAXPu9aYi2-_xaEBJm0PSrqtjq0K32img3DizwgnUEDPPzC9tV0D1zwEft_gRZ_q-ONnECoScW93z6RLWN5T9RhhNONCQ_wTIB5ukO6nSviqJjdZ150v-Nk8NKRjb9l4CxU9tdc0YeMeDfIYQ8jjwnMjTbscJhb2sEJWPeIGNFois24tyKDLKsliiOJ3U_pHuBucJcNUzMQ",
+    			"state" : ""
+    		}
+    	}
+    ],
+    
+    "search_criteria" :
+    {
+    	"type" : ["track", "album", "artist"],
+    	"query" : "Michael Jackson",
+    	"market" : ["US"],
+    	"limit"  : "20",
+    	"offset" : "0"
+    }
+}

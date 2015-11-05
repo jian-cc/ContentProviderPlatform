@@ -1,0 +1,59 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.media.MediaSearchResponse",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchResponse"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "media_search_response:v1",
+	"title":"media search response",
+	"name":"mediaSearchResponse",
+	"description":"object of media search response",
+
+	"properties" :
+    {
+    	"status" : 
+    	{ 
+    		"description":"the status enum for this media search response",
+    		"$ref" : "../common/responseStatus.json"
+    	},
+    	
+    	"response_id" : {
+    		"description":"unique id for this search response",
+    		"type" : "string"
+    	},
+    	
+    	"search_criteria" : 
+    	{
+    		"description":"return back the original search criteria for log and debug purpose",
+    		"$ref" : "mediaSearchCriteria.json"
+    	},
+    	
+    	"provider_summary" : 
+    	{
+    		"description":"summaries for individual provider",
+    		"type" : "array",
+        	"items" : 
+        	{
+        		"$ref" : "../common/providerResponseSummary.json"
+        	}
+    	},
+    	
+    	"error_content" : 
+    	{
+    		"description":"it will return when response status is failure",
+    		"$ref" : "../common/errorContent.json"
+    	},
+    	
+    	"results" : 
+    	{
+    		"description":"it will return when response status is success",
+    		"type" : "array",
+    		"items" : 
+    		{
+    			"type" : "mediaSearchResult.json"
+    		}
+    	}
+    },
+    
+    "required": ["status", "response_id", "seaerch_criteria"]
+      
+}

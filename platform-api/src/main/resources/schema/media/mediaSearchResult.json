@@ -1,0 +1,64 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.media.MediaSearchResult",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchResult"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "media_search_result:v1",
+	"title":"individual search result",
+	"name":"mediaSearchResult",
+	"description":"information of search result for a single media result from a single provider.",
+
+	"properties" :
+    {
+    	"provider" : { 
+    		"description" : "the name of provider from which this result is obtained",
+    		"type" : "string"
+    	},
+    	
+    	"type" : {
+    		"description" : "the media type for this result",
+    		"$ref" : "mediaType.json"
+    	},
+    	
+    	"title" : {
+    		"description" : "the media title or name",
+    		"type" : "string"
+    	},
+    	
+    	"id" : {
+    		"description" : "the unique id for this media in its provider",
+    		"type" : "string"
+    	},
+    	
+    	"href" : 
+    	{
+    		"description" : "the ref url for that media",
+    		"type" : "string"
+    	},
+    	
+    	"icon" : 
+    	{
+    		"description":"information of icon url",
+    		"type" : "string"
+    	},
+    	
+    	"market" : 
+    	{
+    		"description" : "available market for this media",
+    		"type" : "array",
+    		"items" : 
+        	{
+        		"type" : "string"
+        	}
+    	
+    	},
+    	
+    	"provider_detail" : {
+    		"description":"this is undefined json object used to carry raw result from provider",
+    		"type" : "object"
+    	}
+    },
+    
+    "required": ["provider", "type", "title", "id"]
+      
+}

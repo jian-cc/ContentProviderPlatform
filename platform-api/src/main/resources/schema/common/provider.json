@@ -1,0 +1,9 @@
+{
+	"enum" : ["google", "spotify", "yelp"],
+	"javaType" : "com.cloudcar.search.schema.common.Provider",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "provider:v1",
+	"title":"provider",
+	"name":"provider",
+	"description":"the enum values for the name of in-house providers"
+}

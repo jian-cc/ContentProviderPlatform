@@ -77,11 +77,42 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>com.cloudcar.contentprovider.platform</groupId>
+			<artifactId>spotify-media-provider</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
 
 		
 	</dependencies>
+	
+	<build>
+    	<plugins>
+      		<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-shade-plugin</artifactId>
+        		<version>2.4.2</version>
+        		<executions>
+          		<execution>
+            	<phase>package</phase>
+            	<goals>
+              		<goal>shade</goal>
+            	</goals>
+            	<configuration>
+              		<transformers>
+                		<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  			<mainClass>com.cloudcar.content.platform.app.CPPLauncher</mainClass>
+                		</transformer>
+              		</transformers>
+            	</configuration>
+          		</execution>
+        		</executions>
+      		</plugin>
+    	</plugins>
+  	</build>
 
 </project>

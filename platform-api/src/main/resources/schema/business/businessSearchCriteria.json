@@ -1,7 +1,8 @@
 {
 	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.business.BusinessSearchCriteria",
 	"$schema": "http://json-schema.org/draft-03/schema",
-	"id": "businessSearchCriteria:v1",
+	"id": "business_search_criteria:v1",
 	"title":"business search criteria",
 	"name":"businessSearchCriteria",
 	"description":"aggregate criteria information for business search. We expect at least some information is available",
@@ -12,10 +13,13 @@
     		"description" : "The location information for search",
     		"$ref" : "../common/location.json"
     	},
+    	
     	"business_entity" : 
     	{
+    		"description" : "business name and other information to identify itself",
     		"$ref": "../common/searchEntity.json"
     	},
+    	
         "type" : 
         {
         	"description" : "the type of business, such as Hotel, Food, etc. We support multi-types search",
@@ -25,6 +29,7 @@
         		"type" : "string"
         	}
         },
+        
         "category" : 
         {
         	"description" : "the category of business, such as restaurant, discount store, etc. We support multi-categories search",
@@ -34,6 +39,7 @@
         		"type" : "string"
         	}
         },
+        
         "flavor" : 
         {
         	"description" : "the special narrow down for category, such as Chinese restaurant, toy discount store, etc.",
@@ -43,6 +49,7 @@
         		"type" : "string"
         	}
         },
+        
         "timing" : 
         {
         	"description" : "search result for a special time. Mainly used to decide if the business is open. If not defined, use current time",

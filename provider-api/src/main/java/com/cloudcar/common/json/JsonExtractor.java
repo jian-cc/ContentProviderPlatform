@@ -54,7 +54,6 @@ public enum JsonExtractor {
 		rulesTree.getChildren().forEach( ( key, node ) -> {
 			Object element = internalExtract( node, src );
 			if ( element != null ) {
-				System.out.println( "The json element is: " + element );
 				result.put( key, element );
 			}
 		} );
@@ -75,7 +74,6 @@ public enum JsonExtractor {
 				KeyTreeNode newNode = node.update( node.getAlterKey().getKeyValue() );
 				return extractArray( newNode, (JSONArray) data );
 			} else {
-				// return directly if it is not an json array but other object array
 				return data;
 			}
 		} else if ( node.getAlterKey() != null ) {

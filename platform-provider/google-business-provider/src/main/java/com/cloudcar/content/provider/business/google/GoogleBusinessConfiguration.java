@@ -9,11 +9,10 @@ import com.cloudcar.common.json.JsonLoader;
 import com.cloudcar.content.provider.api.ContentProviderConverter;
 import com.cloudcar.content.provider.api.ContentProviderExecutor;
 import com.cloudcar.content.provider.api.ContentProviderHandler;
-import com.cloudcar.content.provider.base.DefaultContentProviderConverter;
 import com.cloudcar.content.provider.base.DefaultContentProviderExecutor;
 import com.cloudcar.content.provider.base.DefaultContentProviderHandler;
-import com.cloudcar.search.schema.business.BusinessRequest;
-import com.cloudcar.search.schema.business.BusinessResponse;
+import com.cloudcar.search.schema.business.BusinessSearchRequest;
+import com.cloudcar.search.schema.business.BusinessSearchResponse;
 import com.cloudcar.search.schema.business.BusinessSearchResult;
 import com.cloudcar.search.schema.configuration.ProviderConfig;
 
@@ -33,16 +32,23 @@ public class GoogleBusinessConfiguration {
 	}
 
 	@Bean
-	ContentProviderConverter<BusinessRequest, BusinessSearchResult> googleBusinessConverter() throws IOException {
+	ContentProviderConverter<BusinessSearchResult> googleBusinessConverter() throws IOException {
 
-		return new DefaultContentProviderConverter<BusinessRequest, BusinessSearchResult>(
-				"googleResultExtract.properties" );
+		return new GoogleContentProviderConverter( "googleResultExtract.properties" );
 	}
 
 	@Bean
-	ContentProviderHandler<BusinessRequest, BusinessResponse, BusinessSearchResult> googleBusinessHandler() {
+	ContentProviderHandler<BusinessSearchRequest, BusinessSearchResponse, BusinessSearchResult> googleBusinessHandler(
+			ProviderConfig googleBusinessConfig, ContentProviderExecutor googleBusinessExecutor,
+			ContentProviderConverter<BusinessSearchResult> googleBusinessConverter ) {
 
-		return new DefaultContentProviderHandler<BusinessRequest, BusinessResponse, BusinessSearchResult>();
+		DefaultContentProviderHandler<BusinessSearchRequest, BusinessSearchResponse, BusinessSearchResult> handler = new DefaultContentProviderHandler<BusinessSearchRequest, BusinessSearchResponse, BusinessSearchResult>();
+
+		handler.setConfig( googleBusinessConfig );
+		handler.setConverter( googleBusinessConverter );
+		handler.setExecutor( googleBusinessExecutor );
+
+		return handler;
 	}
 
 }

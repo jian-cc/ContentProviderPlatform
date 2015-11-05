@@ -1,0 +1,55 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.OAuthInfo",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "oauth_info:v1",
+	"title":"OAuth credential information",
+	"name":"oauthInfo",
+	"description":"information of oauth credential information for a user in a single provider",
+
+	"properties" :
+    {
+    	"client_type" : 
+    	{
+    		"description": "The type of client", 
+    		"enum" : ["public", "confidential"]
+    	},
+    	
+    	"client_id" : 
+    	{
+    		"description": "public client identifier for a registered client", 
+    		"type" : "string"
+    	},
+    	
+    	"client_secret" : 
+    	{
+    		"description": "confidential client credential for a registered client", 
+    		"type" : "string"
+    	},
+    	
+    	"redirect_url" : 
+    	{
+    		"description": "redirect url expected by oauth authorize server", 
+    		"type" : "string"
+    	},
+    	
+    	"refresh_token" : 
+    	{
+    		"description": "oauth refresh token", 
+    		"type" : "string"
+    	},
+    	
+    	"access_token" : 
+    	{
+    		"description": "oauth access token", 
+    		"type" : "string"
+    	},
+    	
+    	"state" : 
+    	{
+    		"description": "oauth state", 
+    		"type" : "string"
+    	}
+    }
+      
+}

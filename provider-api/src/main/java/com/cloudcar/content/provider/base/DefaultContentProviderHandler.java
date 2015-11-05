@@ -7,7 +7,6 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cloudcar.common.json.JSONObjectParser;
 import com.cloudcar.common.json.JsonLoader;
@@ -17,11 +16,11 @@ import com.cloudcar.content.provider.api.ContentProviderHandler;
 import com.cloudcar.search.interfaces.SearchRequest;
 import com.cloudcar.search.interfaces.SearchResponse;
 import com.cloudcar.search.interfaces.SearchResult;
-import com.cloudcar.search.schema.business.BusinessRequest;
-import com.cloudcar.search.schema.business.BusinessResponse;
-import com.cloudcar.search.schema.business.BusinessResponse.Status;
+import com.cloudcar.search.schema.business.BusinessSearchRequest;
+import com.cloudcar.search.schema.business.BusinessSearchResponse;
 import com.cloudcar.search.schema.business.BusinessSearchResult;
 import com.cloudcar.search.schema.common.ProviderType;
+import com.cloudcar.search.schema.common.ResponseStatus;
 import com.cloudcar.search.schema.configuration.ProviderConfig;
 import com.google.gson.Gson;
 
@@ -33,16 +32,12 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 
 {
 
-	@Autowired
-	private ContentProviderConverter<Request, Result>	converter;
+	private ContentProviderConverter<Result>	converter;
 
-	@Autowired
-	private ContentProviderExecutor						executor;
+	private ContentProviderExecutor				executor;
 
-	@Autowired
-	private ProviderConfig								config;
+	private ProviderConfig						config;
 
-	@Autowired
 	public DefaultContentProviderHandler() {
 
 	}
@@ -60,7 +55,7 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 	}
 
 	@Override
-	public ContentProviderConverter<Request, Result> getConverter() {
+	public ContentProviderConverter<Result> getConverter() {
 
 		return this.converter;
 	}
@@ -81,17 +76,19 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 		// TODO more validation code will be added here.
 
 		JSONObject response = null;
+
+		Map<String, Object> header = converter.buildRequestHeaders( request );
 		try {
 
 			switch ( config.getProviderMethod() ) {
 
 				case GET:
 					Map<String, Object> query = converter.buildGetRequest( request );
-					response = executor.doGet( query );
+					response = executor.doGet( query, header );
 					break;
 				case POST:
 					JSONObject providerRequest = converter.buildPostRequest( request );
-					response = executor.doPost( providerRequest );
+					response = executor.doPost( providerRequest, header );
 					break;
 				default:
 					// throw exception
@@ -111,32 +108,39 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 	@SuppressWarnings( "unchecked" )
 	protected Response processRawResponse( JSONObject rawResponse ) {
 
-		String rootKey = config.getContentRootKey();
-
-		BusinessResponse response = new BusinessResponse();
-		response.setStatus( Status.SUCCESS );
+		BusinessSearchResponse response = new BusinessSearchResponse();
+		response.setStatus( ResponseStatus.SUCCESS );
 		response.setResponseId( Long.toString( System.currentTimeMillis() ) );
 
 		List<Object> results = new ArrayList<Object>();
 		response.setResults( results );
 
-		Object rawResults = JSONObjectParser.extract( rootKey, rawResponse );
-
-		if ( rawResults instanceof JSONObject ) {
-			Result result = converter.convertResult( (JSONObject) rawResults );
+		JSONArray rawArray = extractRawResults( rawResponse );
+		rawArray.forEach( json -> {
+			Result result = converter.convertResult( (JSONObject) json );
 			results.add( result );
-		} else if ( rawResults instanceof JSONArray ) {
-			JSONArray rawArray = (JSONArray) rawResults;
-			rawArray.forEach( json -> {
-				Result result = converter.convertResult( (JSONObject) json );
-				results.add( result );
-			} );
-		}
+		} );
 
 		return (Response) response;
 	}
 
-	public void setConverter( ContentProviderConverter<Request, Result> converter ) {
+	protected JSONArray extractRawResults( JSONObject response ) {
+
+		String rootKey = config.getContentRootKey();
+
+		Object rawResults = JSONObjectParser.extract( rootKey, response );
+		if ( rawResults instanceof JSONArray ) {
+			return (JSONArray) rawResults;
+		} else {
+			JSONArray result = new JSONArray();
+			result.add( rawResults );
+
+			return result;
+		}
+
+	}
+
+	public void setConverter( ContentProviderConverter<Result> converter ) {
 
 		this.converter = converter;
 	}
@@ -159,10 +163,10 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 
 	public static void main( String[] args ) throws Exception {
 
-		DefaultContentProviderConverter<BusinessRequest, BusinessSearchResult> converter = new DefaultContentProviderConverter<BusinessRequest, BusinessSearchResult>(
+		DefaultContentProviderConverter<BusinessSearchResult> converter = new DefaultContentProviderConverter<BusinessSearchResult>(
 				"googleResultExtract.properties" );
 
-		DefaultContentProviderHandler<BusinessRequest, BusinessResponse, BusinessSearchResult> handler = new DefaultContentProviderHandler<BusinessRequest, BusinessResponse, BusinessSearchResult>();
+		DefaultContentProviderHandler<BusinessSearchRequest, BusinessSearchResponse, BusinessSearchResult> handler = new DefaultContentProviderHandler<BusinessSearchRequest, BusinessSearchResponse, BusinessSearchResult>();
 
 		ProviderConfig config = JsonLoader.INSTANCE.loadAsJavaObject( "googleConfig.json", ProviderConfig.class );
 
@@ -178,7 +182,7 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 
 		// BusinessResponse response = handler.processRawResponse( data );
 
-		BusinessResponse response = handler.processRequest( request );
+		BusinessSearchResponse response = handler.processRequest( request );
 
 		Gson gson = new Gson();
 		String json = gson.toJson( response );
@@ -198,7 +202,7 @@ public class DefaultContentProviderHandler<Request extends SearchRequest, Respon
 			Response response = this.processRequest( JsonLoader.INSTANCE.convertToJSON( request.toString() ) );
 
 			Gson gson = new Gson();
-			String resultStr = gson.toJson( response, BusinessResponse.class );
+			String resultStr = gson.toJson( response, BusinessSearchResponse.class );
 
 			JsonObject result = new JsonObject( resultStr );
 			message.reply( result );

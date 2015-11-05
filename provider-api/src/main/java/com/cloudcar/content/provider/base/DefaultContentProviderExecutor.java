@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -56,15 +57,15 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 	}
 
 	@Override
-	public JSONObject execute( JSONObject request ) throws CPPException {
+	public JSONObject execute( JSONObject request, Map<String, Object> header ) throws CPPException {
 
 		switch ( config.getProviderMethod() ) {
 
 			case GET:
 				Map<String, Object> query = buildQuery( request );
-				return doGet( query );
+				return doGet( query, header );
 			case POST:
-				return doPost( request );
+				return doPost( request, header );
 			default:
 				// throw exception
 				return null;
@@ -72,7 +73,7 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 	}
 
 	@Override
-	public JSONObject doGet( Map<String, Object> query ) {
+	public JSONObject doGet( Map<String, Object> query, Map<String, Object> header ) {
 
 		MultivaluedMap<String, Object> requestMap = new MultivaluedMapImpl<String, Object>();
 
@@ -92,7 +93,9 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 
 		ResteasyWebTarget currentConnect = connect.queryParams( requestMap );
 
-		String response = currentConnect.request( MediaType.APPLICATION_JSON ).get( String.class );
+		Builder builder = setHeader( currentConnect, header );
+
+		String response = builder.get( String.class );
 
 		JSONParser parser = new JSONParser();
 
@@ -109,24 +112,6 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		/*
-		 * List result = (List) response.get( "results" );
-		 * 
-		 * result.forEach( data -> { System.out.println( "The result data type is: " + data.getClass().getSimpleName()
-		 * ); } );
-		 */
-
-		// System.out.println( "The result type is: " + result.getClass().getSimpleName() );
-
-		System.out.println( "response is: " + response );
-
-		// int status = response.getStatus();
-		// System.out.println( "The status is: " + status );
-
-		// Object entity = response.getEntity();
-
-		// response.close();
 
 		return newResponse;
 	}
@@ -155,13 +140,15 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 	}
 
 	@Override
-	public JSONObject doPost( JSONObject request ) {
+	public JSONObject doPost( JSONObject request, Map<String, Object> header ) {
 
 		Response response = null;
 		JSONObject result = null;
 
 		try {
-			response = connect.request().accept( "application/json" ).post( Entity.json( request ) );
+			Builder builder = setHeader( this.connect, header );
+
+			response = builder.post( Entity.json( request ) );
 
 			return (JSONObject) ( response.getEntity() );
 
@@ -179,6 +166,23 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 		return result;
 	}
 
+	protected Builder setHeader( ResteasyWebTarget currConnect, Map<String, Object> header ) {
+
+		Builder builder = currConnect.request();
+
+		if ( header != null && !header.isEmpty() ) {
+			header.forEach( ( key, value ) -> builder.header( key, value ) );
+		}
+
+		if ( config.getProviderContentType() == null ) {
+			builder.accept( MediaType.APPLICATION_JSON );
+		} else {
+			builder.accept( config.getProviderContentType() );
+		}
+
+		return builder;
+	}
+
 	public static void main( String[] args ) {
 
 		try {
@@ -192,7 +196,7 @@ public class DefaultContentProviderExecutor implements ContentProviderExecutor {
 
 			DefaultContentProviderExecutor executor = new DefaultContentProviderExecutor( config );
 
-			JSONObject result = executor.execute( request );
+			JSONObject result = executor.execute( request, null );
 
 			System.out.println( "The result is: " + result );
 

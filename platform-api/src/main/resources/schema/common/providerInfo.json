@@ -1,0 +1,44 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.ProviderInfo",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "provider_info:v1",
+	"title":"provider information",
+	"name":"providerInfo",
+	"description":"information of a search result from a single provider",
+
+	"properties" :
+    {
+    	"type" : 
+    	{
+    		"description": "The type of this provider", 
+    		"$ref" : "providerType.json"
+    	},
+    	
+    	"name" : 
+    	{
+    		"description": "The name of the provider. It will be used to map a provider in CPP by using name convention. It must be a supported one", 
+    		"type" : "string"
+    	},
+    	
+    	"credential_info" :
+    	{
+    		"description": "The access credential information required by provider", 
+    		"type" : "object",
+    		"oneOf" : 
+    		[
+    			{ "$ref" : "password.json"},
+    			{ "$ref" : "oauthInfo.json"}
+    		]
+    	},
+    	
+    	"additional_info" : 
+    	{
+    		"description": "the additional information specially for this provider. Beware, this is opaque object which can only be understood by that provider. Using it means CPP client has knowledge about a special provider and is not desired",
+    		"type" : "object"
+    	},
+    	
+    	"required": ["type", "name"]
+    }
+      
+}

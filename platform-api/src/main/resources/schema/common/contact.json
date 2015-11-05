@@ -11,8 +11,10 @@
     {
         "name" : 
         { 
+        	"description" : "contact's name",
         	"type" : "string"
         },
+        
         "phones" : 
         {
         	"description":"contact can have multiple phone. The first one is default one",
@@ -22,8 +24,10 @@
         		"type" : "string"
         	}
         },
+        
         "email" : 
         {
+        	"description" : "contact email address",
         	"type" : "string"
         }
     },

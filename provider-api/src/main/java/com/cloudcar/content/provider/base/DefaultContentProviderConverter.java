@@ -13,38 +13,58 @@ import com.cloudcar.common.json.KeyNodeTreeProcessor;
 import com.cloudcar.common.json.KeyTreeNode;
 import com.cloudcar.common.json.RuleConfiguration;
 import com.cloudcar.content.provider.api.ContentProviderConverter;
-import com.cloudcar.search.interfaces.SearchRequest;
 import com.cloudcar.search.interfaces.SearchResult;
-import com.cloudcar.search.schema.business.BusinessSearchResult;
 
-public class DefaultContentProviderConverter<Request extends SearchRequest, Result extends SearchResult>
-		implements ContentProviderConverter<Request, Result> {
+public class DefaultContentProviderConverter<Result extends SearchResult> implements ContentProviderConverter<Result> {
 
-	private final KeyTreeNode rulesTree;
+	private final KeyTreeNode	resultRules;
 
-	public DefaultContentProviderConverter( String configFileName ) throws IOException {
+	private final KeyTreeNode	getRules;
+
+	private final KeyTreeNode	headerRules;
+
+	private final KeyTreeNode	postRules;
+
+	public DefaultContentProviderConverter( String resultConfig ) throws IOException {
+
+		this( resultConfig, null, null, null );
+	}
+
+	public DefaultContentProviderConverter( String resultConfig, String getConfig, String headerConfig,
+			String postConfig ) throws IOException {
+
+		resultRules = resultConfig == null ? null : initializeRules( resultConfig );
+
+		getRules = getConfig == null ? null : initializeRules( getConfig );
+
+		headerRules = headerConfig == null ? null : initializeRules( headerConfig );
+
+		postRules = postConfig == null ? null : initializeRules( postConfig );
+	}
+
+	private KeyTreeNode initializeRules( String configFileName ) throws IOException {
 
 		RuleConfiguration convertRules = new RuleConfiguration( configFileName );
 
-		rulesTree = KeyNodeTreeProcessor.INSTANCE.buildKeyTree( convertRules );
+		return KeyNodeTreeProcessor.INSTANCE.buildKeyTree( convertRules );
 	}
 
 	@Override
 	public JSONObject buildPostRequest( JSONObject stdRequest ) {
 
-		// TODO Auto-generated method stub
-		return null;
+		return postRules == null ? null : JsonExtractor.INSTANCE.extract( postRules, (JSONObject) stdRequest );
 	}
 
 	@SuppressWarnings( "unchecked" )
 	@Override
 	public Result convertResult( JSONObject rawResult ) {
 
-		JSONObject result = JsonExtractor.INSTANCE.extract( rulesTree, (JSONObject) rawResult );
+		JSONObject result = JsonExtractor.INSTANCE.extract( resultRules, (JSONObject) rawResult );
 		addRawData( result, rawResult );
 
 		try {
-			return (Result) ( JsonLoader.INSTANCE.convertToJava( result, BusinessSearchResult.class ) );
+			System.out.println( "The result is: " + result.toJSONString() );
+			return JsonLoader.INSTANCE.convertToJava( result, getResultClass() );
 		}
 		catch ( Exception e ) {
 			// TODO Auto-generated catch block
@@ -53,36 +73,56 @@ public class DefaultContentProviderConverter<Request extends SearchRequest, Resu
 		}
 	}
 
-	@SuppressWarnings( "unchecked" )
-	private void addRawData( JSONObject result, Object rawResult ) {
+	protected Class<Result> getResultClass() {
 
-		JSONArray rawArray = new JSONArray();
-		rawArray.add( rawResult );
-		result.put( "provider_detail", rawArray );
+		throw new UnsupportedOperationException( "getResultClass() need to be implemented by child class" );
+	}
+
+	@SuppressWarnings( "unchecked" )
+	protected void addRawData( JSONObject result, Object rawResult ) {
+
+		throw new UnsupportedOperationException( "addRawData() need to be implemented by child class" );
 	}
 
 	@Override
-	public Map<String, Object> buildGetRequest( JSONObject request ) {
+	public Map<String, Object> buildGetRequest( JSONObject stdRequest ) {
+
+		if ( getRules == null ) {
+			return null;
+		}
+
+		Map<String, Object> extractResult = JsonExtractor.INSTANCE.extract( getRules, stdRequest );
+		if ( extractResult == null ) {
+			return null;
+		}
 
 		Map<String, Object> result = new HashMap<String, Object>();
 
-		JSONObject criteria = (JSONObject) ( request.get( "search_criteria" ) );
-
-		JSONObject location = (JSONObject) ( criteria.get( "location" ) );
-
-		JSONObject geocode = (JSONObject) ( location.get( "geocode" ) );
-
-		String geoLocation = geocode.get( "latitude" ).toString() + "," + geocode.get( "longitude" ).toString();
-
-		result.put( "location", geoLocation );
-
-		result.put( "radius", location.get( "radius" ).toString() );
-
-		Object categories = criteria.get( "category" );
-
-		result.put( "query", categories );
+		extractResult.forEach( ( key, value ) -> {
+			if ( value instanceof JSONArray ) {
+				result.put( key, convertJSONArray( (JSONArray) value ) );
+			} else {
+				result.put( key, value );
+			}
+		} );
 
 		return result;
+
+	}
+
+	protected String convertJSONArray( JSONArray array ) {
+
+		StringBuilder builder = new StringBuilder();
+
+		array.forEach( json -> builder.append( json.toString() ).append( "," ) );
+
+		return builder.substring( 0, builder.length() - 1 );
+	}
+
+	@Override
+	public Map<String, Object> buildRequestHeaders( JSONObject stdRequest ) {
+
+		return headerRules == null ? null : JsonExtractor.INSTANCE.extract( headerRules, stdRequest );
 	}
 
 }

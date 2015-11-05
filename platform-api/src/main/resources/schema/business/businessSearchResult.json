@@ -1,5 +1,6 @@
 {
 	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.business.BusinessSearchResult",
 	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchResult"],
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "business_search_result:v1",
@@ -9,36 +10,55 @@
 
 	"properties" :
     {
-    	"location" : { 
+    	"location" : 
+    	{ 
+    		"description" : "location information for business entity",
     		"$ref" : "../common/location.json"
     	},
-    	"id" : {
+    	
+    	"id" : 
+    	{
+    		"description" : "unique id in cloudcar for this business entity",
     		"type" : "string"
     	},
-    	"title" : {
+    	
+    	"title" : 
+    	{
+    		"description" : "the name or title of this business entity",
     		"type" : "string"
     	},
-    	"contact" : {
+    	
+    	"contact" : 
+    	{
+    		"description" : "contact information for this business entity",
     		"$ref" : "../common/contact.json"
     	},
+    	
     	"business_time" : 
     	{
+    		"description" : "business time on weekly base for this business entity",
     		"$ref" : "businessTime.json"
     	},
+    	
     	"icon" : 
     	{
-    		"description":"information of icon url",
+    		"description" : "information of icon url",
     		"type" : "string"
     	},
-    	"type" : {
+    	
+    	"type" : 
+    	{
+    		"description" : "types this business entity belongs to",
     		"type" : "array",
     		"items" : 
         	{
         		"type" : "string"
         	}
     	},
+    	
     	"category" : 
     	{
+    		"description" : "categories this business entity belongs to",
     		"type" : "array",
     		"items" : 
         	{
@@ -46,7 +66,9 @@
         	}
     	
     	},
-    	"provider_detail" : {
+    	
+    	"provider_detail" : 
+    	{
     		"description":"this is undefined json object",
     		"type" : "array",
     		"items" : 
@@ -54,6 +76,8 @@
         		"type" : "../common/providerDetail.json"
         	}
     	}
-    }
+    },
+    
+    "required": ["location", "title"]
       
 }

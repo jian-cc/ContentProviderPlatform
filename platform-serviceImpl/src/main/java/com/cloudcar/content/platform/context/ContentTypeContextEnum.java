@@ -1,11 +1,13 @@
 package com.cloudcar.content.platform.context;
 
 public enum ContentTypeContextEnum {
-	BUSINESS( "business", "business", "application/json", "application/json" ),
+	BUSINESS( "BUSINESS", "business", "application/json", "application/json" ),
 
-	PLACE( "place", "place", "application/json", "application/json" ),
+	PLACE( "PLACE", "place", "application/json", "application/json" ),
 
-	WEATHERE( "weather", "weather", "application/json", "application/json" );
+	MEDIA( "MEDIA", "media", "application/json", "application/json" ),
+
+	WEATHER( "WEATHER", "weather", "application/json", "application/json" );
 
 	private final String	name;
 

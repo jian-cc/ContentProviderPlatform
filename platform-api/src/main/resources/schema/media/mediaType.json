@@ -1,0 +1,9 @@
+{
+	"enum" : ["track", "album", "artist", "playlist"],
+	"javaType" : "com.cloudcar.search.schema.media.MediaType",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "media_type:v1",
+	"title":"media type",
+	"name":"mediaType",
+	"description":"the enum values for support media types"
+}

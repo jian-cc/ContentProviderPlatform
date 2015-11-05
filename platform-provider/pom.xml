@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>google-business-provider</module>
+		<module>spotify-media-provider</module>
 	</modules>
 	
 	<dependencyManagement>

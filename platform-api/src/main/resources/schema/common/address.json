@@ -11,26 +11,37 @@
     {
         "address1" : 
         { 
+        	"description" : "street info part 1",
         	"type" : "string"
         },
+        
         "address2" : 
         {
+        	"description" : "street info part 2",
         	"type" : "string"
         },
+        
         "city" : 
         {
+        	"description" : "city info",
         	"type" : "string"
         },
+        
         "postcode" : 
         {
+        	"description" : "post code info",
         	"type" : "string"
         },
+        
         "state" : 
         {
+        	"description" : "state info",
         	"type" : "string"
         },
+        
         "country" : 
         {
+        	"description" : "country info",
         	"type" : "string"
         }
     },

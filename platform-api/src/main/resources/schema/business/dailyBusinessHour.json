@@ -11,15 +11,21 @@
     {
     	"is_open" : 
     	{ 
+    		"description" : "is open in that day",
     		"enum" : ["yes", "no", "unknown"]
     	},
+    	
     	"start" : 
     	{
+    		"description" : "start time if it is open",
     		"$ref" : "../common/time.json"
     	},
+    	
     	"end" : {
+    		"description" : "end time if it is open",
     		"$ref" : "../common/time.json"
     	}
-    }
-      
+    },
+    
+    "required": ["is_open"]  
 }

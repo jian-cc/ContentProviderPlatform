@@ -1,18 +1,61 @@
 {
-	"id": "http://json-schema.org/draft-04/schema#",
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "request of business/location search request",
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.business.BusinessTime",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "business_time:v1",
+	"title":"weekly business time",
+	"name":"businessTime",
+	"description":"information of weekly schedule for a business entity",
 
 	"properties" :
     {
-    	"open_now" : { "type" : "boolean"},
-    	"monday" : {"$ref" : "dailyBusinessHour.json"},
-    	"tuesday" : {"$ref" : "dailyBusinessHour.json"},
-    	"wednesday" : {"$ref" : "dailyBusinessHour.json"},
-    	"thursday" : {"$ref" : "dailyBusinessHour.json"},
-    	"friday" : {"$ref" : "dailyBusinessHour.json"},
-    	"saturday" : {"$ref" : "dailyBusinessHour.json"},
-    	"sunday" : {"$ref" : "dailyBusinessHour.json"}
+    	"open_now" : 
+    	{ 
+    		"description" : "if the business currently opens",
+    		"type" : "boolean"
+    	},
+    	
+    	"monday" : 
+    	{
+    		"description" : "Monday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"tuesday" : 
+    	{
+    		"description" : "Tuesday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"wednesday" : 
+    	{
+    		"description" : "Wednesday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"thursday" : 
+    	{
+    		"description" : "Thursday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"friday" : 
+    	{
+    		"description" : "Friday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"saturday" : 
+    	{
+    		"description" : "Saturday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	},
+    	
+    	"sunday" : 
+    	{
+    		"description" : "Sunday schedule",
+    		"$ref" : "dailyBusinessHour.json"
+    	}
     }
       
 }

@@ -1,0 +1,43 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.common.ProviderResponseSummary",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "provider_response_summary:v1",
+	"title":"provider response summary",
+	"name":"providerResponseSummary",
+	"description":"Summary for a single provider",
+
+	"properties" :
+    {
+    	"name" : {
+    		"description":"provider name",
+    		"type" : "string"
+    	},
+    	
+    	"status" : 
+    	{ 
+    		"description":"the status enum for this response",
+    		"$ref" : "../common/responseStatus.json"
+    	},
+    	
+    	"search_criteria" : 
+    	{
+    		"description":"The actual search criteria sent to that provider. Use for log and debug purpose",
+    		"type" : "string"
+    	},
+    	
+    	"number_result" : {
+    		"description":"The number of results obtained from this provider in this response",
+    		"type" : "number"
+    	},
+    	
+    	"error_content" : 
+    	{
+    		"description":"it will return when response status is failure",
+    		"$ref" : "../common/errorContent.json"
+    	}
+    },
+    
+    "required": ["name", "status", "seaerch_criteria"]
+      
+}

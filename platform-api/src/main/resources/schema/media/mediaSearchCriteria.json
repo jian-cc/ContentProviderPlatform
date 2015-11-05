@@ -1,0 +1,52 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.media.MediaSearchCriteria",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "media_search_criteria:v1",
+	"title":"media search criteria",
+	"name":"mediaSearchCriteria",
+	"description":"aggregate criteria information for media search. We expect at least some information is available",
+    
+    "properties": {
+        "type" : 
+        {
+        	"description" : "the type of media, such as track, album, artist, etc. We support multi-types search",
+        	"type" : "array",
+        	"items" : 
+        	{
+        		"type" : "mediaType.json"
+        	}
+        	
+        },
+        
+        "query" : 
+        {
+        	"description" : "It should be a nature language query. Up to individual provider to explain it",
+        	"type" : "string"
+        },
+        
+        "market" : 
+        {
+        	"description" : "the special market in which the search item might be available. It will up individual provider to explain it",
+        	"type" : "array",
+        	"items" : 
+        	{
+        		"type" : "string"
+        	}
+        },
+        
+        "limit" : 
+        {
+        	"description" : "The maximum results in case of pagination. Note. Pagination is not supportable for now",
+        	"type" : "number"
+        },
+        
+        "offset" : 
+        {
+        	"description" : "The start number for current page in case of pagination. Note. Pagination is not supportable for now",
+        	"type" : "number"
+        }
+    },
+    
+    "required": ["type", "query"]
+}

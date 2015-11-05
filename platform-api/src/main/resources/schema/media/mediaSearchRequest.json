@@ -1,0 +1,37 @@
+{
+	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.media.MediaSearchRequest",
+	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchRequest"],
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "media_search_request:v1",
+	"title":"media search request",
+	"name":"mediaSearchRequest",
+	"description":"Media search request information.",
+    
+    "properties": 
+    {
+    	"search_id": 
+    	{
+    		"description":"We expect this id is used like session id and help CPP client to link search history together",
+    		"type": "string"
+    	},
+    	
+    	"providers" : 
+        {
+        	"description" : "The information for individual provider, see providerInfo.json for more detail",
+        	"type" : "array",
+        	"items" : 
+        	{
+        		"$ref" : "../common/providerInfo.json"
+        	}
+        },
+        
+    	"search_criteria" : 
+    	{
+    		"$ref" : 
+    		"mediaSearchCriteria.json"
+    	}
+    },
+    
+    "required": ["search_id", "providers", "search_criteria"]
+}

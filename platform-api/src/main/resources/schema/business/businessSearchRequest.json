@@ -1,11 +1,12 @@
 {
 	"type":"object",
+	"javaType" : "com.cloudcar.search.schema.business.BusinessSearchRequest",
 	"javaInterfaces" : ["com.cloudcar.search.interfaces.SearchRequest"],
 	"$schema": "http://json-schema.org/draft-03/schema",
-	"id": "business_request:v1",
-	"title":"business request",
-	"name":"businessRequest",
-	"description":"Business request information.",
+	"id": "business_search_request:v1",
+	"title":"business search request",
+	"name":"businessSearchRequest",
+	"description":"Business search request information.",
     
     "properties": 
     {
@@ -14,10 +15,11 @@
     		"description":"We expect this id is used like session id and help CPP client to link search history together",
     		"type": "string"
     	},
+    	
     	"search_criteria" : 
     	{
-    		"$ref" : 
-    		"businessSearchCriteria.json"
+    		"description":"detail information for this search",
+    		"$ref" : "businessSearchCriteria.json"
     	}
     },
     

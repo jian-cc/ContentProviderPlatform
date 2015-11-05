@@ -68,10 +68,10 @@ public enum JsonLoader {
 		return mapper.readValue( in, type );
 	}
 
-	public <T> T convertToJava( JSONObject data, Class<T> type )
+	public <T> T convertToJava( JSONObject data, Class<T> classType )
 			throws JsonParseException, JsonMappingException, IOException {
 
-		return mapper.readValue( data.toString(), type );
+		return mapper.readValue( data.toJSONString(), classType );
 
 	}
 

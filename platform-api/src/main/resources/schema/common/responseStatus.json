@@ -1,0 +1,9 @@
+{
+	"enum" : ["SUCCESS", "FAILURE", "NO_RESULT"],
+	"javaType" : "com.cloudcar.search.schema.common.ResponseStatus",
+	"$schema": "http://json-schema.org/draft-03/schema",
+	"id": "response_status:v1",
+	"title":"response status",
+	"name":"responseStatus",
+	"description":"the enum values for CPP response status"
+}

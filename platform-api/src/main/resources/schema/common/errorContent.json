@@ -2,7 +2,7 @@
 	"type":"object",
 	"javaType" : "com.cloudcar.search.schema.common.ErrorContent",
 	"$schema": "http://json-schema.org/draft-03/schema",
-	"id": "errorContent:v1",
+	"id": "error_content:v1",
 	"title":"error content",
 	"name":"errorContent",
 	"description":"information of common error content",
@@ -14,6 +14,7 @@
     		"description": "The enumeration error codes indicate typical failure cases", 
     		"enum" : ["ERROR_LOC", "BAD_CATEGORY", "TIME_OUT"]
     	},
+    	
     	"message" : 
     	{
     		"description": "detail message to explain why there is failure response",

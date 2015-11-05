@@ -41,6 +41,11 @@ public enum ProviderHandlerCache {
 
 	public static void main( String[] args ) {
 
+		CPPApplicationContext context = CPPApplicationContext.INSTANCE;
+		for ( String name : context.getContext().getBeanDefinitionNames() ) {
+			System.out.println( "The bean name is: " + name );
+		}
+
 		ProviderHandlerCache instance = ProviderHandlerCache.INSTANCE;
 
 		List<ContentProviderHandler> providers = instance.getProviderConfigForType( ContentTypeContextEnum.BUSINESS );
