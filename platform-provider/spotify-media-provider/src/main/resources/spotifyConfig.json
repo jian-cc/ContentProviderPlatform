@@ -1,0 +1,23 @@
+{
+	"identifier" : "spotify-media",
+        
+  	"provider_type" : "MEDIA", 
+        
+     "message_queue" : "spotify_media_msg",
+     
+     "timeout" : "100000",
+     
+     "defaultError" : "Failed to get spotify media search result", 
+        
+     "provider_url" : "https://api.spotify.com",
+        
+     "provider_endpoint" : "v1/search", 
+        
+     "provider_method" : "GET", 
+        
+      "provider_product_type" : "application/json",
+       
+      "provider_content_type" : "application/json",
+      
+      "content_root_key" : "items"
+}
